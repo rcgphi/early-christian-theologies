@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Build Your Own Theology</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    #result {
+      margin-top: 30px;
+      padding: 15px;
+      background-color: #f4f4f4;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>Build Your Own Theology</h1>
+
+  <label for="god">Who is the true God?</label>
+  <select id="god">
+    <option>Yahweh, God of Israel</option>
+    <option>A higher God above Yahweh</option>
+    <option>The Serpent, bringer of knowledge</option>
+    <option>One God whose Word is Jesus</option>
+    <option>Totally unknowable divine source</option>
+  </select>
+
+  <label for="jesus">Who is Jesus?</label>
+  <select id="jesus">
+    <option>A chosen human prophet</option>
+    <option>Fully divine and fully human</option>
+    <option>Only appeared human</option>
+    <option>Created divine being</option>
+    <option>Merely human, not divine</option>
+  </select>
+
+  <label for="world">What is the material world?</label>
+  <select id="world">
+    <option>Good and divinely created</option>
+    <option>Made by a lesser being</option>
+    <option>Evil and imprisoning</option>
+    <option>Illusory and irrelevant</option>
+    <option>A moral testing ground</option>
+  </select>
+
+  <label for="salvation">How does salvation happen?</label>
+  <select id="salvation">
+    <option>Through faith and divine grace</option>
+    <option>Through secret knowledge</option>
+    <option>By following the Law</option>
+    <option>By moral effort alone</option>
+    <option>Through ascetic withdrawal</option>
+  </select>
+
+  <label for="afterlife">What happens after death?</label>
+  <select id="afterlife">
+    <option>Resurrection at the end of time</option>
+    <option>Judgment of the eternal soul</option>
+    <option>Temporary purgation</option>
+    <option>Return to divine Oneness</option>
+    <option>Annihilation of the wicked</option>
+  </select>
+
+  <div id="result">
+    <strong>Your theology in brief:</strong>
+    <p id="output">Choose your options to generate a custom doctrine!</p>
+  </div>
+
+  <script>
+    const selects = document.querySelectorAll('select');
+    const output = document.getElementById('output');
+
+    selects.forEach(select => {
+      select.addEventListener('change', () => {
+        const selections = Array.from(selects).map(s => s.value);
+        output.innerHTML = `You believe the true God is <strong>${selections[0]}</strong>, 
+          that Jesus is <strong>${selections[1]}</strong>, 
+          the material world is <strong>${selections[2]}</strong>, 
+          salvation comes <strong>${selections[3]}</strong>, 
+          and after death, <strong>${selections[4]}</strong>.`;
+      });
+    });
+  </script>
+</body>
+</html>
