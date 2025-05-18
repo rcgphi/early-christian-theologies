@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,7 @@
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
-      max-width: 700px;
+      max-width: 800px;
       margin: auto;
     }
     h1 {
@@ -37,47 +36,47 @@
 
   <label for="god">Who is the true God?</label>
   <select id="god">
-    <option>Yahweh, God of Israel</option>
-    <option>A higher God above Yahweh</option>
-    <option>The Serpent, bringer of knowledge</option>
-    <option>One God whose Word is Jesus</option>
-    <option>Totally unknowable divine source</option>
+    <option value="Yahweh, the God of Israel">Yahweh, God of Israel</option>
+    <option value="a higher divine being above Yahweh">A higher God above Yahweh</option>
+    <option value="the Serpent, the bringer of knowledge">The Serpent, bringer of knowledge</option>
+    <option value="the one God whose Word is Jesus">One God whose Word is Jesus</option>
+    <option value="a totally unknowable divine source">Totally unknowable divine source</option>
   </select>
 
   <label for="jesus">Who is Jesus?</label>
   <select id="jesus">
-    <option>A chosen human prophet</option>
-    <option>Fully divine and fully human</option>
-    <option>Only appeared human</option>
-    <option>Created divine being</option>
-    <option>Merely human, not divine</option>
+    <option value="a chosen human prophet">A chosen human prophet</option>
+    <option value="fully divine and fully human">Fully divine and fully human</option>
+    <option value="a divine being who only appeared human">Only appeared human</option>
+    <option value="a created divine being, not eternal">Created divine being</option>
+    <option value="a mortal teacher with no divine nature">Merely human, not divine</option>
   </select>
 
   <label for="world">What is the material world?</label>
   <select id="world">
-    <option>Good and divinely created</option>
-    <option>Made by a lesser being</option>
-    <option>Evil and imprisoning</option>
-    <option>Illusory and irrelevant</option>
-    <option>A moral testing ground</option>
+    <option value="good and divinely created">Good and divinely created</option>
+    <option value="a flawed creation of a lesser being">Made by a lesser being</option>
+    <option value="evil and a prison for the soul">Evil and imprisoning</option>
+    <option value="an illusion or irrelevant to salvation">Illusory and irrelevant</option>
+    <option value="a moral testing ground for the soul">A moral testing ground</option>
   </select>
 
   <label for="salvation">How does salvation happen?</label>
   <select id="salvation">
-    <option>Through faith and divine grace</option>
-    <option>Through secret knowledge</option>
-    <option>By following the Law</option>
-    <option>By moral effort alone</option>
-    <option>Through ascetic withdrawal</option>
+    <option value="through faith and divine grace">Through faith and divine grace</option>
+    <option value="through secret knowledge of one's divine origin">Through secret knowledge</option>
+    <option value="by following God's Law">By following the Law</option>
+    <option value="by moral effort and free will">By moral effort alone</option>
+    <option value="through ascetic withdrawal from the world">Through ascetic withdrawal</option>
   </select>
 
   <label for="afterlife">What happens after death?</label>
   <select id="afterlife">
-    <option>Resurrection at the end of time</option>
-    <option>Judgment of the eternal soul</option>
-    <option>Temporary purgation</option>
-    <option>Return to divine Oneness</option>
-    <option>Annihilation of the wicked</option>
+    <option value="the dead will be resurrected at the end of time">Resurrection at the end of time</option>
+    <option value="souls are judged immediately after death">Judgment of the eternal soul</option>
+    <option value="souls pass through a temporary purification">Temporary purgation</option>
+    <option value="souls reunite with the divine Oneness">Return to divine Oneness</option>
+    <option value="the wicked are annihilated forever">Annihilation of the wicked</option>
   </select>
 
   <div id="result">
@@ -86,16 +85,70 @@
   </div>
 
   <script>
+    const profiles = [
+      {
+        name: "Marcionite",
+        god: "a higher divine being above Yahweh",
+        jesus: "a divine being who only appeared human",
+        world: "a flawed creation of a lesser being",
+        salvation: "through faith and divine grace",
+        afterlife: "souls are judged immediately after death"
+      },
+      {
+        name: "Valentinian",
+        god: "a totally unknowable divine source",
+        jesus: "a divine being who only appeared human",
+        world: "evil and a prison for the soul",
+        salvation: "through secret knowledge of one's divine origin",
+        afterlife: "souls reunite with the divine Oneness"
+      },
+      {
+        name: "Adoptionist",
+        god: "Yahweh, the God of Israel",
+        jesus: "a chosen human prophet",
+        world: "good and divinely created",
+        salvation: "by following God's Law",
+        afterlife: "the dead will be resurrected at the end of time"
+      },
+      {
+        name: "Arian",
+        god: "the one God whose Word is Jesus",
+        jesus: "a created divine being, not eternal",
+        world: "good and divinely created",
+        salvation: "through faith and divine grace",
+        afterlife: "souls are judged immediately after death"
+      },
+      {
+        name: "Orthodox",
+        god: "the one God whose Word is Jesus",
+        jesus: "fully divine and fully human",
+        world: "good and divinely created",
+        salvation: "through faith and divine grace",
+        afterlife: "souls are judged immediately after death"
+      }
+    ];
+
     const selects = document.querySelectorAll('select');
     const output = document.getElementById('output');
+
+    function matchProfile(selections) {
+      for (const profile of profiles) {
+        const matches = Object.values(profile).slice(1).filter((val, i) => val === selections[i]);
+        if (matches.length === 5) return `You are a <strong>${profile.name}</strong>!`;
+        if (matches.length >= 3) return `You mostly align with <strong>${profile.name}</strong>, though you diverge on some key points.`;
+      }
+      return "Your theology is unique—a custom blend!";
+    }
 
     selects.forEach(select => {
       select.addEventListener('change', () => {
         const selections = Array.from(selects).map(s => s.value);
-        output.innerHTML = `You believe the true God is <strong>${selections[0]}</strong>, 
-          that Jesus is <strong>${selections[1]}</strong>, 
-          the material world is <strong>${selections[2]}</strong>, 
-          salvation comes <strong>${selections[3]}</strong>, 
+        const match = matchProfile(selections);
+        output.innerHTML = `${match}<br><br>
+          You believe that the true God is <strong>${selections[0]}</strong>,
+          that Jesus is <strong>${selections[1]}</strong>,
+          the material world is <strong>${selections[2]}</strong>,
+          salvation comes <strong>${selections[3]}</strong>,
           and after death, <strong>${selections[4]}</strong>.`;
       });
     });
