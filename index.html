@@ -37,6 +37,7 @@
 
   <label for="god">Who is the true God?</label>
   <select id="god">
+    <option value="" disabled selected>Select an option</option>
     <option value="yahweh">Yahweh, the God of Israel</option>
     <option value="serpent">The Serpent, bringer of knowledge</option>
     <option value="unknown">An Unknown God beyond the creator of this world</option>
@@ -44,6 +45,7 @@
 
   <label for="jesus">What is the nature of Jesus?</label>
   <select id="jesus">
+    <option value="" disabled selected>Select an option</option>
     <option value="both">Fully human and fully divine</option>
     <option value="divine">Only divine, not human</option>
     <option value="human">Only human, not divine</option>
@@ -51,6 +53,7 @@
 
   <label for="afterlife">What happens after death?</label>
   <select id="afterlife">
+    <option value="" disabled selected>Select an option</option>
     <option value="resurrection">Bodily resurrection and judgment</option>
     <option value="annihilation">Annihilation of the wicked</option>
     <option value="universalism">All return to God eventually</option>
@@ -58,18 +61,21 @@
 
   <label for="grace">Is Divine Grace necessary for being good?</label>
   <select id="grace">
+    <option value="" disabled selected>Select an option</option>
     <option value="yes">Yes, grace is essential</option>
     <option value="no">No, humans can choose goodness on their own</option>
   </select>
 
   <label for="sacraments">Do sacraments count if the priest is morally corrupt?</label>
   <select id="sacraments">
+    <option value="" disabled selected>Select an option</option>
     <option value="yes">Yes, the sacrament is valid regardless</option>
     <option value="no">No, the priest must be pure</option>
   </select>
 
   <label for="subordination">Is Jesus subordinate to God the Father?</label>
   <select id="subordination">
+    <option value="" disabled selected>Select an option</option>
     <option value="equal">Jesus is equal and co-eternal with the Father</option>
     <option value="subordinate">Jesus is divine but created and subordinate</option>
   </select>
@@ -86,6 +92,11 @@
       const grace = document.getElementById("grace").value;
       const sacraments = document.getElementById("sacraments").value;
       const subordination = document.getElementById("subordination").value;
+
+      if (!god || !jesus || !afterlife || !grace || !sacraments || !subordination) {
+        document.getElementById("result").innerHTML = "⚠️ Please answer all questions before checking for heresy.";
+        return;
+      }
 
       if (god !== "yahweh") {
         heresies.push("You reject the God of Israel. (Gnostic tendencies)");
