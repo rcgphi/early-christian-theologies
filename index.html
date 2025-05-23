@@ -2,156 +2,120 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Build Your Own Theology</title>
+  <title>Are You Guilty of Heresy?</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
+      font-family: Georgia, serif;
+      padding: 2em;
       max-width: 800px;
       margin: auto;
     }
-    h1 {
-      text-align: center;
-    }
     label {
       display: block;
-      margin-top: 20px;
+      margin-top: 1em;
       font-weight: bold;
     }
     select {
       width: 100%;
-      padding: 8px;
-      margin-top: 5px;
+      padding: 0.5em;
+      margin-top: 0.5em;
+    }
+    button {
+      margin-top: 2em;
+      padding: 0.75em 1.5em;
+      font-size: 1em;
     }
     #result {
-      margin-top: 30px;
-      padding: 15px;
-      background-color: #f4f4f4;
-      border: 1px solid #ccc;
+      margin-top: 2em;
+      font-size: 1.1em;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <h1>Build Your Own Theology</h1>
+  <h1>Are You Guilty of Heresy?</h1>
 
   <label for="god">Who is the true God?</label>
   <select id="god">
-    <option value="Yahweh, the God of Israel">Yahweh, God of Israel</option>
-    <option value="a higher divine being above Yahweh">A higher God above Yahweh</option>
-    <option value="the Serpent, the bringer of knowledge">The Serpent, bringer of knowledge</option>
-    <option value="the one God whose Word is Jesus">One God whose Word is Jesus</option>
-    <option value="a totally unknowable divine source">Totally unknowable divine source</option>
+    <option value="yahweh">Yahweh, the God of Israel</option>
+    <option value="serpent">The Serpent, bringer of knowledge</option>
+    <option value="unknown">An Unknown God beyond the creator of this world</option>
   </select>
 
-  <label for="jesus">Who is Jesus?</label>
+  <label for="jesus">What is the nature of Jesus?</label>
   <select id="jesus">
-    <option value="a chosen human prophet">A chosen human prophet</option>
-    <option value="fully divine and fully human">Fully divine and fully human</option>
-    <option value="a divine being who only appeared human">Only appeared human</option>
-    <option value="a created divine being, not eternal">Created divine being</option>
-    <option value="a mortal teacher with no divine nature">Merely human, not divine</option>
-  </select>
-
-  <label for="world">What is the material world?</label>
-  <select id="world">
-    <option value="good and divinely created">Good and divinely created</option>
-    <option value="a flawed creation of a lesser being">Made by a lesser being</option>
-    <option value="evil and a prison for the soul">Evil and imprisoning</option>
-    <option value="an illusion or irrelevant to salvation">Illusory and irrelevant</option>
-    <option value="a moral testing ground for the soul">A moral testing ground</option>
-  </select>
-
-  <label for="salvation">How does salvation happen?</label>
-  <select id="salvation">
-    <option value="through faith and divine grace">Through faith and divine grace</option>
-    <option value="through secret knowledge of one's divine origin">Through secret knowledge</option>
-    <option value="by following God's Law">By following the Law</option>
-    <option value="by moral effort and free will">By moral effort alone</option>
-    <option value="through ascetic withdrawal from the world">Through ascetic withdrawal</option>
+    <option value="both">Fully human and fully divine</option>
+    <option value="divine">Only divine, not human</option>
+    <option value="human">Only human, not divine</option>
   </select>
 
   <label for="afterlife">What happens after death?</label>
   <select id="afterlife">
-    <option value="the dead will be resurrected at the end of time">Resurrection at the end of time</option>
-    <option value="souls are judged immediately after death">Judgment of the eternal soul</option>
-    <option value="souls pass through a temporary purification">Temporary purgation</option>
-    <option value="souls reunite with the divine Oneness">Return to divine Oneness</option>
-    <option value="the wicked are annihilated forever">Annihilation of the wicked</option>
+    <option value="resurrection">Bodily resurrection and judgment</option>
+    <option value="annihilation">Annihilation of the wicked</option>
+    <option value="universalism">All return to God eventually</option>
   </select>
 
-  <div id="result">
-    <strong>Your theology in brief:</strong>
-    <p id="output">Choose your options to generate a custom doctrine!</p>
-  </div>
+  <label for="grace">Is Divine Grace necessary for being good?</label>
+  <select id="grace">
+    <option value="yes">Yes, grace is essential</option>
+    <option value="no">No, humans can choose goodness on their own</option>
+  </select>
+
+  <label for="sacraments">Do sacraments count if the priest is morally corrupt?</label>
+  <select id="sacraments">
+    <option value="yes">Yes, the sacrament is valid regardless</option>
+    <option value="no">No, the priest must be pure</option>
+  </select>
+
+  <label for="subordination">Is Jesus subordinate to God the Father?</label>
+  <select id="subordination">
+    <option value="equal">Jesus is equal and co-eternal with the Father</option>
+    <option value="subordinate">Jesus is divine but created and subordinate</option>
+  </select>
+
+  <button onclick="checkHeresy()">Check for Heresy</button>
+  <div id="result"></div>
 
   <script>
-    const profiles = [
-      {
-        name: "Marcionite",
-        god: "a higher divine being above Yahweh",
-        jesus: "a divine being who only appeared human",
-        world: "a flawed creation of a lesser being",
-        salvation: "through faith and divine grace",
-        afterlife: "souls are judged immediately after death"
-      },
-      {
-        name: "Valentinian",
-        god: "a totally unknowable divine source",
-        jesus: "a divine being who only appeared human",
-        world: "evil and a prison for the soul",
-        salvation: "through secret knowledge of one's divine origin",
-        afterlife: "souls reunite with the divine Oneness"
-      },
-      {
-        name: "Adoptionist",
-        god: "Yahweh, the God of Israel",
-        jesus: "a chosen human prophet",
-        world: "good and divinely created",
-        salvation: "by following God's Law",
-        afterlife: "the dead will be resurrected at the end of time"
-      },
-      {
-        name: "Arian",
-        god: "the one God whose Word is Jesus",
-        jesus: "a created divine being, not eternal",
-        world: "good and divinely created",
-        salvation: "through faith and divine grace",
-        afterlife: "souls are judged immediately after death"
-      },
-      {
-        name: "Orthodox",
-        god: "the one God whose Word is Jesus",
-        jesus: "fully divine and fully human",
-        world: "good and divinely created",
-        salvation: "through faith and divine grace",
-        afterlife: "souls are judged immediately after death"
-      }
-    ];
+    function checkHeresy() {
+      const heresies = [];
+      const god = document.getElementById("god").value;
+      const jesus = document.getElementById("jesus").value;
+      const afterlife = document.getElementById("afterlife").value;
+      const grace = document.getElementById("grace").value;
+      const sacraments = document.getElementById("sacraments").value;
+      const subordination = document.getElementById("subordination").value;
 
-    const selects = document.querySelectorAll('select');
-    const output = document.getElementById('output');
-
-    function matchProfile(selections) {
-      for (const profile of profiles) {
-        const matches = Object.values(profile).slice(1).filter((val, i) => val === selections[i]);
-        if (matches.length === 5) return `You are a <strong>${profile.name}</strong>!`;
-        if (matches.length >= 3) return `You mostly align with <strong>${profile.name}</strong>, though you diverge on some key points.`;
+      if (god !== "yahweh") {
+        heresies.push("You reject the God of Israel. (Gnostic tendencies)");
       }
-      return "Your theology is unique—a custom blend!";
+      if (jesus === "divine") {
+        heresies.push("You deny Jesus' humanity. (Docetism)");
+      }
+      if (jesus === "human") {
+        heresies.push("You deny Jesus' divinity. (Ebionism or Psilanthropism)");
+      }
+      if (afterlife === "universalism") {
+        heresies.push("You believe in universal salvation. (Origenism)");
+      }
+      if (grace === "no") {
+        heresies.push("You deny the need for divine grace. (Pelagianism)");
+      }
+      if (sacraments === "no") {
+        heresies.push("You invalidate sacraments based on the priest's worthiness. (Donatism)");
+      }
+      if (subordination === "subordinate") {
+        heresies.push("You believe Jesus was created and subordinate. (Arianism)");
+      }
+
+      const result = document.getElementById("result");
+      if (heresies.length === 0) {
+        result.innerHTML = "✅ You are orthodox. You may proceed to communion.";
+      } else {
+        result.innerHTML = "⚠️ <strong>Heresy Detected!</strong><br><ul><li>" + heresies.join("</li><li>") + "</li></ul>";
+      }
     }
-
-    selects.forEach(select => {
-      select.addEventListener('change', () => {
-        const selections = Array.from(selects).map(s => s.value);
-        const match = matchProfile(selections);
-        output.innerHTML = `${match}<br><br>
-          You believe that the true God is <strong>${selections[0]}</strong>,
-          that Jesus is <strong>${selections[1]}</strong>,
-          the material world is <strong>${selections[2]}</strong>,
-          salvation comes <strong>${selections[3]}</strong>,
-          and after death, <strong>${selections[4]}</strong>.`;
-      });
-    });
   </script>
 </body>
 </html>
